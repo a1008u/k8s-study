@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample-rs
+spec:
+  replicas: 3 # 3つのreplicasetの作成
+  selector:
+    matchLabels: # ReplicaSetのラベル
+      app: sample-app # spec.template.metadata.labelsと一致させる
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
+          ports:
+            - containerPort: 80
