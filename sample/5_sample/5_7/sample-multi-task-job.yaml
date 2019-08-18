@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sample-multi-task-job
+spec:
+  # 初回に3並列で実行し、30秒後に2並列でPodが起動する
+  completions: 5
+  parallelism: 3
+  backoffLimit: 5
+  template:
+    metadata:
+      name: sleep-job
+    spec:
+      containers:
+      - name: sleep-container
+        image: centos:6
+        command: ["sleep"]
+        args: ["30"]
+      restartPolicy: Never

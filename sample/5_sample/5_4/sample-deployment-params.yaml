@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment-params
+spec:
+  # PodがReady状態になってからDeploymentリソース時にPodの起動が完了したと判断するまでの最低秒数
+  minReadySeconds: 0
+  # Deploymentが保持するReplicaSetの数
+  # ロールバック可能な履歴数
+  revisionHistoryLimit: 2
+  # Recreate/RollingUpdate処理のタイムアウト時間
+  # タイムアウト時間が経過した場合、自動でロールバックされる
+  progressDeadlineSeconds: 3600
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.12
