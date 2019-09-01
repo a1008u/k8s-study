@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+# 条件３
+metadata:
+  name: sample-headless
+spec:
+  # 条件１
+  type: ClusterIP
+  # 条件２
+  clusterIP: None
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 80
+      targetPort: 80
+  selector:
+    app: sample-app

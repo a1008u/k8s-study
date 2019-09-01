@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sample-externalname
+  namespace: default
+spec:
+  # ExternalNameに設定
+  type: ExternalName
+  externalName: external.example.com

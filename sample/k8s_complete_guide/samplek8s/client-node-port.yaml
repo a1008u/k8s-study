@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-node-port
+spec:
+  type: NodePort
+  ports:
+    - port: 3050 # 他のpodなどで、targetPort（Pod）にアクセスをさせるためのPort番号
+      targetPort: 3000 # 転送先のコンテナ(pod)のPort番号
+      nodePort: 31515 # 30000 - 32767の間で設定(ブラウザなどでアクセス用のPort番号)
+  # podのmetadata.labelsを指定(podとの紐付け)
+  selector:
+    component: web
